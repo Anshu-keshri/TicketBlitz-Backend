@@ -7,15 +7,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig {
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
+
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**") // Allow ALL endpoints
-                        .allowedOriginPatterns("*") // Allow ALL origins
-                        .allowedMethods("*") // Allow GET, POST, etc.
+
+                registry.addMapping("/**")
+                        .allowedOrigins(
+                                "http://localhost:5173",
+                                "https://ticketblitz-frontend.onrender.com"
+                        )
+                        .allowedMethods("*")
+                        .allowedHeaders("*")
                         .allowCredentials(true);
+
             }
         };
     }
